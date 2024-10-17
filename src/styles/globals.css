@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .navbar-closed {
+        @apply hidden md:flex gap-3;
+    }
+
+    .navbar-open {
+        @apply fixed top-0 h-full flex flex-col right-0 bg-white border-l p-5 gap-4 md:flex-row md:border-l-0 md:bg-transparent;
+    }
+
+    .navbar-open-backdrop {
+        @apply bg-black/45 fixed left-0 top-0 w-full h-full z-[19];
+    }
+
+    .navbar-closed-backdrop {
+        @apply bg-black/45 fixed left-0 top-0 w-full h-full hidden z-[19];
+    }
+}
