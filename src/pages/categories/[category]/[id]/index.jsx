@@ -28,6 +28,8 @@ const MealDetail = () => {
           },
         }
       );
+      console.log(res.data.meals[0]);
+
       setMeal(res.data.meals[0]);
       setLoading(false);
     } catch (error) {
@@ -73,22 +75,26 @@ const MealDetail = () => {
   };
 
   const YoutubeEmbed = ({ url }) => {
-    const urlParse = new URL(url);
+    try {
+      const urlParse = new URL(url);
 
-    return (
-      <iframe
-        className="w-full my-3"
-        width="560"
-        height="315"
-        src={`https://www.youtube-nocookie.com/embed/${
-          urlParse.search.split("?v=")[1]
-        }`}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
-    );
+      return (
+        <iframe
+          className="w-full my-3"
+          width="560"
+          height="315"
+          src={`https://www.youtube-nocookie.com/embed/${
+            urlParse.search.split("?v=")[1]
+          }`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      );
+    } catch (error) {
+      return null;
+    }
   };
 
   const Body = () => {
@@ -139,12 +145,12 @@ const MealDetail = () => {
           <p className="text-[#fd5c5c] font-semibold mb-4">
             {meal?.strArea ?? "..."} Culinary
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
             <div>
               <img
                 src={meal?.strMealThumb}
                 alt={meal?.strMeal}
-                className="rounded-2xl"
+                className="rounded-2xl w-full"
               />
             </div>
             <div className="flex flex-col gap-4">
@@ -237,10 +243,14 @@ const MealDetail = () => {
               </ul>
             </div>
           </div>
-          <div className="mt-5">
-            <h2 className="text-3xl text-gray-700 md:text-center">Tutorials</h2>
-            <YoutubeEmbed url={meal?.strYoutube} />
-          </div>
+          {meal?.strYoutube && (
+            <div>
+              <h2 className="text-3xl text-gray-700 md:text-center">
+                Tutorials
+              </h2>
+              <YoutubeEmbed url={meal?.strYoutube} />
+            </div>
+          )}
         </div>
       </>
     );
