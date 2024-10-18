@@ -1,6 +1,6 @@
 ## How to run this project
 
-First, run the development server:
+Run these commands below on your terminal/cli:
 
 ```bash
 # install dependencies
@@ -12,6 +12,8 @@ npm run build
 # run project
 npm start
 ```
+
+after `npm start`, open your browser and go to http://localhost:3000 or you can see direct url on your own terminal/cli
 
 ## Requirements:
 - Node.JS v20.17.0
